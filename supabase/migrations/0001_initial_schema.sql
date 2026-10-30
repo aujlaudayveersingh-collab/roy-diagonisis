@@ -2,7 +2,12 @@
 -- MODERN DIAGNOSTIC — Migration 0001: Initial Schema
 -- =============================================================================
 -- Run this in the Supabase SQL Editor (Dashboard → SQL Editor → New query).
--- Safe to run once on a fresh project.
+-- Safe to re-run (idempotent).
+--
+-- CORRECTION (2026-10-30): public.profiles is now created BEFORE the is_admin()
+-- function that reads it. PostgreSQL validates LANGUAGE sql function bodies at
+-- CREATE time, so the original order failed on a fresh database with:
+--   ERROR 42P01: relation "public.profiles" does not exist (LINE 40)
 -- =============================================================================
 
 -- ---------- Extensions ----------
@@ -26,6 +31,19 @@ do $$ begin
   create type public.admin_role as enum ('admin', 'staff');
 exception when duplicate_object then null; end $$;
 
+-- ---------- profiles ----------
+-- One row per back-office user, linked to auth.users.
+-- MUST be created before is_admin() below (LANGUAGE sql function bodies are
+-- validated against existing relations at creation time).
+create table if not exists public.profiles (
+  id          uuid primary key references auth.users(id) on delete cascade,
+  email       text not null,
+  full_name   text,
+  role        public.admin_role not null default 'staff',
+  created_at  timestamptz not null default now(),
+  updated_at  timestamptz not null default now()
+);
+
 -- ---------- Helpers ----------
 -- Returns true when the currently authenticated user is an admin.
 -- SECURITY DEFINER so RLS policies can call it without recursing into the
@@ -41,17 +59,6 @@ as $$
     where id = auth.uid() and role in ('admin', 'staff')
   );
 $$;
-
--- ---------- profiles ----------
--- One row per back-office user, linked to auth.users.
-create table if not exists public.profiles (
-  id          uuid primary key references auth.users(id) on delete cascade,
-  email       text not null,
-  full_name   text,
-  role        public.admin_role not null default 'staff',
-  created_at  timestamptz not null default now(),
-  updated_at  timestamptz not null default now()
-);
 
 -- Auto-create a profile when a new auth user signs up.
 create or replace function public.handle_new_user()
