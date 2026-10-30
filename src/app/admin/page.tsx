@@ -41,17 +41,17 @@ export default async function AdminDashboardPage() {
 
       {/* Stat cards */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard label="Total bookings" value={stats?.totalBookings ?? 0} icon={CalendarCheck} tone="brand" />
-        <StatCard label="New inquiries" value={(stats?.newBookings ?? 0) + (stats?.newEnquiries ?? 0)} icon={AlertCircle} tone="amber" sub={`${stats?.newBookings ?? 0} bookings · ${stats?.newEnquiries ?? 0} messages`} />
-        <StatCard label="Pending" value={stats?.pendingBookings ?? 0} icon={Clock} tone="slate" />
-        <StatCard label="Confirmed" value={stats?.confirmedBookings ?? 0} icon={CheckCircle2} tone="emerald" />
+        <StatCard label="Total bookings" value={stats?.totalBookings ?? 0} icon={<CalendarCheck className="h-5 w-5" aria-hidden="true" />} tone="brand" />
+        <StatCard label="New inquiries" value={(stats?.newBookings ?? 0) + (stats?.newEnquiries ?? 0)} icon={<AlertCircle className="h-5 w-5" aria-hidden="true" />} tone="amber" sub={`${stats?.newBookings ?? 0} bookings · ${stats?.newEnquiries ?? 0} messages`} />
+        <StatCard label="Pending" value={stats?.pendingBookings ?? 0} icon={<Clock className="h-5 w-5" aria-hidden="true" />} tone="slate" />
+        <StatCard label="Confirmed" value={stats?.confirmedBookings ?? 0} icon={<CheckCircle2 className="h-5 w-5" aria-hidden="true" />} tone="emerald" />
       </div>
 
       <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard label="Completed" value={stats?.completedBookings ?? 0} icon={TrendingUp} tone="teal" />
-        <StatCard label="Total tests" value={stats?.totalTests ?? 0} icon={TestTubes} tone="brand" sub={`${stats?.activeTests ?? 0} active`} />
-        <StatCard label="Active packages" value={stats?.activePackages ?? 0} icon={Package} tone="teal" />
-        <StatCard label="Total enquiries" value={stats?.totalEnquiries ?? 0} icon={MessageSquare} tone="slate" sub={`${stats?.newEnquiries ?? 0} unread`} />
+        <StatCard label="Completed" value={stats?.completedBookings ?? 0} icon={<TrendingUp className="h-5 w-5" aria-hidden="true" />} tone="teal" />
+        <StatCard label="Total tests" value={stats?.totalTests ?? 0} icon={<TestTubes className="h-5 w-5" aria-hidden="true" />} tone="brand" sub={`${stats?.activeTests ?? 0} active`} />
+        <StatCard label="Active packages" value={stats?.activePackages ?? 0} icon={<Package className="h-5 w-5" aria-hidden="true" />} tone="teal" />
+        <StatCard label="Total enquiries" value={stats?.totalEnquiries ?? 0} icon={<MessageSquare className="h-5 w-5" aria-hidden="true" />} tone="slate" sub={`${stats?.newEnquiries ?? 0} unread`} />
       </div>
 
       {/* Recent bookings */}

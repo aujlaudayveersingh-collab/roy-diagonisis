@@ -172,13 +172,16 @@ export function AdminNav({ email, role }: { email: string; role: string }) {
 export function StatCard({
   label,
   value,
-  icon: Icon,
+  icon,
   tone = 'brand',
   sub,
 }: {
   label: string;
   value: string | number;
-  icon: React.ComponentType<{ className?: string }>;
+  // NOTE: must be a rendered element (<CalendarCheck className="…" />), NOT a
+  // component reference — server components cannot pass functions across the
+  // RSC boundary ("Functions cannot be passed directly to Client Components").
+  icon: React.ReactNode;
   tone?: 'brand' | 'teal' | 'amber' | 'emerald' | 'slate' | 'red';
   sub?: string;
 }) {
@@ -199,7 +202,7 @@ export function StatCard({
           {sub && <p className="mt-1 text-xs text-slate-500">{sub}</p>}
         </div>
         <span className={cn('grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br text-white', tones[tone])}>
-          <Icon className="h-5 w-5" aria-hidden="true" />
+          {icon}
         </span>
       </div>
     </div>
