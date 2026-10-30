@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="200" height="60">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="60" y2="60" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0C63E0"/><stop offset="1" stop-color="#14B8A6"/>
+    </linearGradient>
+  </defs>
+  <rect width="60" height="60" rx="16" fill="url(#g)"/>
+  <path d="M30 15v30M15 30h30" stroke="#fff" stroke-width="6.5" stroke-linecap="round"/>
+  <text x="72" y="28" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="#0F172A">Modern</text>
+  <text x="72" y="48" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="#0C63E0">Diagnostic</text>
+</svg>

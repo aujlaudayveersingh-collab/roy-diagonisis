@@ -1,0 +1,209 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =============================================================================
+   Modern Diagnostic — Global Styles
+   Clean healthcare aesthetic: white surfaces, medical blue + teal accents,
+   generous spacing, subtle depth.
+   ============================================================================= */
+
+@layer base {
+  :root {
+    --header-height: 4.5rem;
+    --announce-height: 2.5rem;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-white text-slate-700 antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-slate-900;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    @apply bg-brand-100 text-brand-900;
+  }
+
+  /* Accessible focus ring */
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand-500 ring-offset-2 ring-offset-white;
+  }
+}
+
+@layer components {
+  /* ---- Layout helpers ---- */
+  .container-site {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .section {
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+
+  .section-tight {
+    @apply py-12 sm:py-16;
+  }
+
+  /* ---- Typography ---- */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-brand-100 bg-brand-50 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-brand-700;
+  }
+
+  .heading-xl {
+    @apply font-display text-3xl font-bold leading-[1.1] tracking-tight text-slate-900 sm:text-4xl lg:text-[3.25rem];
+  }
+
+  .heading-lg {
+    @apply font-display text-2xl font-bold leading-tight tracking-tight text-slate-900 sm:text-3xl lg:text-4xl;
+  }
+
+  .heading-md {
+    @apply font-display text-xl font-bold tracking-tight text-slate-900 sm:text-2xl;
+  }
+
+  .lede {
+    @apply text-base leading-relaxed text-slate-600 sm:text-lg;
+  }
+
+  /* ---- Surfaces ---- */
+  .card {
+    @apply rounded-2xl border border-slate-100 bg-white shadow-soft;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:border-brand-100 hover:shadow-card;
+  }
+
+  /* ---- Buttons ---- */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .btn-primary {
+    @apply btn bg-brand-600 text-white shadow-sm hover:bg-brand-700 hover:shadow-lift active:scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply btn border border-slate-200 bg-white text-slate-700 hover:border-brand-200 hover:bg-brand-50 hover:text-brand-700;
+  }
+
+  .btn-teal {
+    @apply btn bg-teal-600 text-white shadow-sm hover:bg-teal-700 active:scale-[0.98];
+  }
+
+  .btn-whatsapp {
+    @apply btn bg-[#25D366] text-white shadow-sm hover:bg-[#1fba59] active:scale-[0.98];
+  }
+
+  .btn-ghost {
+    @apply btn text-slate-600 hover:bg-slate-100 hover:text-slate-900;
+  }
+
+  .btn-danger {
+    @apply btn bg-red-600 text-white hover:bg-red-700;
+  }
+
+  .btn-sm {
+    @apply px-3.5 py-2 text-xs;
+  }
+
+  .btn-lg {
+    @apply px-7 py-4 text-base;
+  }
+
+  /* ---- Forms ---- */
+  .field {
+    @apply block w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 transition-colors focus:border-brand-400 focus:outline-none focus:ring-4 focus:ring-brand-100 disabled:cursor-not-allowed disabled:bg-slate-50;
+  }
+
+  .field-error {
+    @apply border-red-300 focus:border-red-400 focus:ring-red-100;
+  }
+
+  .label {
+    @apply mb-1.5 block text-sm font-semibold text-slate-700;
+  }
+
+  .hint {
+    @apply mt-1.5 text-xs text-slate-500;
+  }
+
+  .error-text {
+    @apply mt-1.5 text-xs font-medium text-red-600;
+  }
+
+  /* ---- Badges ---- */
+  .badge {
+    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold;
+  }
+
+  .badge-info { @apply badge bg-brand-50 text-brand-700 ring-1 ring-inset ring-brand-100; }
+  .badge-success { @apply badge bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-100; }
+  .badge-warning { @apply badge bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-100; }
+  .badge-danger { @apply badge bg-red-50 text-red-700 ring-1 ring-inset ring-red-100; }
+  .badge-neutral { @apply badge bg-slate-100 text-slate-600 ring-1 ring-inset ring-slate-200; }
+
+  /* ---- Decorative ---- */
+  .gradient-brand {
+    @apply bg-gradient-to-br from-brand-600 via-brand-500 to-teal-500;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-brand-600 to-teal-500 bg-clip-text text-transparent;
+  }
+
+  .grid-bg {
+    @apply bg-grid-sky bg-[size:22px_22px];
+  }
+
+  /* ---- Admin ---- */
+  .admin-table {
+    @apply w-full text-left text-sm;
+  }
+
+  .admin-table thead th {
+    @apply border-b border-slate-200 bg-slate-50 px-4 py-3 text-xs font-semibold uppercase tracking-wider text-slate-500;
+  }
+
+  .admin-table tbody td {
+    @apply border-b border-slate-100 px-4 py-3.5 align-middle text-slate-700;
+  }
+
+  .admin-table tbody tr {
+    @apply hover:bg-slate-50/70;
+  }
+}
+
+@layer utilities {
+  /* Respect reduced-motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Hide scrollbar for horizontal scrollers */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* Screen-reader only */
+  .sr-only-focusable:not(:focus):not(:focus-within) {
+    @apply absolute h-px w-px overflow-hidden whitespace-nowrap;
+  }
+}

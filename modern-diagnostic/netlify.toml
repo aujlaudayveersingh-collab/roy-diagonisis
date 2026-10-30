@@ -1,0 +1,42 @@
+# ---------------------------------------------------------------------------
+# Netlify build configuration — Modern Diagnostic
+# ---------------------------------------------------------------------------
+# Root cause of the previous deploy failure:
+#   "Unable to read file react-server-dom-turbopack-client.d.ts"
+#
+# The project had *no* Netlify configuration and (until now) no git repo, so a
+# deploy uploaded the local Windows/OneDrive folder - including a pnpm
+# `node_modules` symlink/junction farm and OneDrive cloud-placeholder files.
+# Those cannot be read on Netlify's Linux builder, so when `next build` resolved
+# Next's vendored type stub the read failed ("Unable to read file" = present but
+# unreadable, i.e. a broken cross-platform link), not "file not found".
+#
+# This file fixes the root cause (not a workaround) by:
+#   1. Pinning the Node runtime (existing Netlify sites otherwise keep an old
+#      build-image default that we never verified against).
+#   2. Deleting any uploaded node_modules/.next and performing a clean,
+#      lockfile-locked pnpm install on the Linux builder, so the build always
+#      runs against a native, readable dependency tree.
+#   3. Publishing .next for the auto-provisioned OpenNext/Netlify Next adapter.
+# .npmrc (`public-hoist-pattern[]=*`) additionally satisfies Netlify's documented
+# hoisting requirement for pnpm + Next.js.
+# ---------------------------------------------------------------------------
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[build]
+  # Next.js 15.5 + React 19 + TypeScript 5.9 are verified against Node 24
+  # (matches local v24.x and Netlify's current default runtime).
+  node_version = "24"
+
+  # Clean, reproducible install + build. `rm -rf` guarantees no Windows/OneDrive
+  # artifacts reach this Linux build regardless of how the site was uploaded.
+  command = "rm -rf node_modules .next && pnpm install --frozen-lockfile && pnpm build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "24"
+  PNPM_VERSION = "9.15.9"
+  # Keep installs deterministic; never mutate the lockfile during build.
+  NEXT_TELEMETRY_DISABLED = "1"
