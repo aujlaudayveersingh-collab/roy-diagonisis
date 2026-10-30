@@ -22,6 +22,9 @@
 # hoisting requirement for pnpm + Next.js.
 # ---------------------------------------------------------------------------
 
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
 [build]
   # Next.js 15.5 + React 19 + TypeScript 5.9 are verified against Node 24
   # (matches local v24.x and Netlify's current default runtime).

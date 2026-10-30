@@ -36,6 +36,9 @@ importers:
         specifier: ^2.6.0
         version: 2.6.1
     devDependencies:
+      '@netlify/plugin-nextjs':
+        specifier: ^5.16.5
+        version: 5.16.5
       '@types/node':
         specifier: ^22.10.0
         version: 22.20.5
@@ -225,6 +228,10 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
+
+  '@netlify/plugin-nextjs@5.16.5':
+    resolution: {integrity: sha512-pt0j/YCZr5Kn2ziGS4Ps+RvREEn5LN2M9iv9iqEgNWZGb4esu7MCMy4RIYS0UR3JuBHxVtsvPHo0gEv+RKFpag==}
+    engines: {node: '>=18.0.0'}
 
   '@next/env@15.5.28':
     resolution: {integrity: sha512-xxW5EBI8fMPuVTPBW7LL980IRbuDXlbkUAwp9DDhtb4Lnich3nJ13uYpvrX4VE74hWPf6AvHHAMmGCidcHjbfg==}
@@ -550,8 +557,8 @@ packages:
       sass:
         optional: true
 
-  node-releases@2.0.61:
-    resolution: {integrity: sha512-5NUN6QCxNFrS9oEA9RPS+d0AP+ooGBzzovY2JhIpDRHacPvOhHjXjUsUMX9qp4nLHZ+5jVgXB2jj/P4arGOE/g==}
+  node-releases@2.0.62:
+    resolution: {integrity: sha512-A0Eq+qVDQI97IbAD6g/HriIuv256el9N8EwF4+xqJ49pwrdRYpdCSmLk0sO4I3fnS6hpYE5v22B73Bk+WArEoQ==}
     engines: {node: '>=18'}
 
   normalize-path@3.0.0:
@@ -888,6 +895,8 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.6.0
 
+  '@netlify/plugin-nextjs@5.16.5': {}
+
   '@next/env@15.5.28': {}
 
   '@next/swc-darwin-arm64@15.5.28':
@@ -1010,7 +1019,7 @@ snapshots:
       baseline-browser-mapping: 2.11.34
       caniuse-lite: 1.0.30001820
       electron-to-chromium: 1.5.468
-      node-releases: 2.0.61
+      node-releases: 2.0.62
       update-browserslist-db: 1.3.4(browserslist@4.29.5)
 
   camelcase-css@2.0.1: {}
@@ -1160,7 +1169,7 @@ snapshots:
       - '@types/node'
       - babel-plugin-macros
 
-  node-releases@2.0.61: {}
+  node-releases@2.0.62: {}
 
   normalize-path@3.0.0: {}
 
